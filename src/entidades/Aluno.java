@@ -7,6 +7,30 @@ public class Aluno {
 	private String curso;
 
 	public Aluno(String matricula, String nome, String curso) {
+		if (matricula == null) {
+			throw new NullPointerException("Matrícula Inválida");
+		}
+
+		if (matricula.trim().isEmpty()) {
+			throw new IllegalArgumentException("Matrícula Inválida");
+		}
+
+		if (nome == null) {
+			throw new NullPointerException("Nome Inválido");
+		}
+
+		if (nome.trim().isEmpty()) {
+			throw new IllegalArgumentException("Nome Inválida");
+		}
+
+		if (curso == null) {
+			throw new NullPointerException("Curso Inválido");
+		}
+
+		if (curso.trim().isEmpty()) {
+			throw new IllegalArgumentException("Curso Inválido");
+		}
+		
 		this.matricula = matricula;
 		this.nome = nome;
 		this.curso = curso;
