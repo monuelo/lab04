@@ -3,21 +3,24 @@ package entidades;
 import java.util.Scanner;
 
 public class Main {
-	static Controle controle = new Controle();
-	static Scanner sc = new Scanner(System.in);
+	private static final String NL = System.lineSeparator();
+	private static Controle controle = new Controle();
+	private static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
+		String matricula;
 		String operacao;
+
 		do {
 			System.out.print(Menu.menu());
-			operacao = sc.nextLine();
+			operacao = sc.nextLine().toUpperCase();
 
 			if (operacao == null) {
-				throw new NullPointerException("Operação Nula");
+				throw new NullPointerException("Operação Nula" + NL);
 			}
 
-			if (operacao.trim().equals("")) {
-				throw new IllegalArgumentException("Operação Inválida");
+			if (operacao.trim().isEmpty()) {
+				throw new IllegalArgumentException("Operação Inválida" + NL);
 			}
 
 			switch (operacao) {
@@ -27,14 +30,23 @@ public class Main {
 
 			case "E":
 				System.out.print(Menu.matricula());
-				String matricula = sc.nextLine();
-				System.out.println(controle.consultaAluno(matricula));
+				matricula = sc.nextLine();
+				Aluno aluno = controle.consultaAluno(matricula);
+				if (aluno == null) {
+					System.out.println("Aluno não cadastrado!" + NL);
+				} else {
+					System.out.println(aluno.toString());
+				}
 				break;
 
 			case "N":
 				System.out.print(Menu.grupo());
 				String grupo = sc.nextLine();
-				controle.cadastraGrupo(grupo);
+				if (controle.cadastraGrupo(grupo)) {
+					System.out.println("Cadastro Realizado." + NL);
+				} else {
+					System.out.println("Grupo já cadastrado." + NL);
+				}
 				break;
 
 			case "A":
@@ -43,13 +55,17 @@ public class Main {
 
 			case "R":
 				System.out.print(Menu.matricula());
-				String respondao = sc.nextLine();
-				System.out.println(controle.alunoResponde(respondao));
+				matricula = sc.nextLine();
+				if(controle.alunoResponde(matricula)) {
+					System.out.println("Aluno Registrado." + NL);
+				} else {
+					System.out.println("Aluno não cadastrado." + NL);
+				}
 				break;
 
 			case "I":
 				System.out.println(controle.imprimeRespondoes());
-				break;
+				break;  
 
 			case "O":
 				break;
@@ -58,7 +74,7 @@ public class Main {
 				if (operacao.trim().isEmpty()) {
 					throw new IllegalArgumentException();
 				}
-				System.out.println("Opção Inválida!" + System.lineSeparator());
+				System.out.println("Opção Inválida!" + NL);
 			}
 
 		} while (!operacao.equals("O"));
@@ -74,25 +90,40 @@ public class Main {
 		System.out.print(Menu.curso());
 		String curso = sc.nextLine();
 
-		return controle.CadastraAluno(matricula, nome, curso);
+		if (controle.CadastraAluno(matricula, nome, curso)) {
+			return "Cadastro Realizado!" + NL;
+		}
+		return "Matrícula Já Cadastrada" + NL;
 	}
 
 	public static String alocaImprime() {
 		System.out.println(Menu.menuAlocacao());
-		String opcao = sc.nextLine();
+		String opcao = sc.nextLine().toUpperCase();
 
 		if (opcao.equals("A")) {
 			System.out.print(Menu.matricula());
 			String matricula = sc.nextLine();
 			System.out.print(Menu.grupo());
 			String grupo = sc.nextLine();
-			return (controle.alocaAluno(matricula, grupo));
+			if (!controle.hasAluno(matricula)) {
+				return "Aluno não cadastrado!" + NL;
+			}
+			if (!controle.hasGrupo(grupo)) {
+				return "Grupo não cadastrado!" + NL;
+			}
+			controle.alocaAluno(matricula, grupo);
+			return "Aluno Alocado!" + NL;
 
 		} else if (opcao.equals("I")) {
 			System.out.print(Menu.grupo());
-			String grupo = sc.nextLine();
-			return (controle.imprimeGrupo(grupo));
+			String nome = sc.nextLine();
+			Grupo grupo = controle.imprimeGrupo(nome);
+			if (!(grupo == null)) {
+				return grupo.toString();
+			} else {
+				return "Grupo não cadastrado." + NL;
+			}
 		}
-		return "Opção Inválida" + System.lineSeparator();
+		return "Opção Inválida" + NL;
 	}
 }

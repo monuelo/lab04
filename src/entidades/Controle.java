@@ -4,62 +4,73 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Controle {
+
 	private static final String NL = System.lineSeparator();
-	private HashMap<String, Aluno> alunos = new HashMap<>();
-	private HashMap<String, Grupo> grupos = new HashMap<>();
-	private ArrayList<Aluno> respostas = new ArrayList<>();
 
-	public String CadastraAluno(String matricula, String nome, String curso) {
-		Aluno aluno = new Aluno(matricula, nome, curso);
-		if (alunos.containsValue(aluno)) {
-			return "MATRÍCULA JÁ CADASTRADA" + NL;
-		}
-		alunos.put(matricula, aluno);
-		return "CADASTRO REALIZADO!" + NL;
+	private HashMap<String, Aluno> alunos;
+	private HashMap<String, Grupo> grupos;
+	private ArrayList<Aluno> respostas;
+
+	public Controle() {
+		this.alunos = new HashMap<>();
+		this.grupos = new HashMap<>();
+		this.respostas = new ArrayList<>();
 	}
-
-	public String consultaAluno(String matricula) {
+	
+	public boolean hasAluno(String matricula) {
 		if (alunos.containsKey(matricula)) {
-			return alunos.get(matricula).toString();
+			return true;
 		}
-		return "Aluno não cadastrado." + NL;
+		return false;
 	}
 
-	public String cadastraGrupo(String nome) {
-		Grupo grupo = new Grupo(nome);
-		if (grupos.containsValue(grupo)) {
-			return "GRUPO JÁ CADASTRADO" + NL;
+	public boolean hasGrupo(String nome) {
+		if (grupos.containsKey(nome)) {
+			return true;
 		}
-		grupos.put(nome, grupo);
-		return "CADASTRO REALIZADO!" + NL;
+		return false;
 	}
 
-	public String alocaAluno(String matricula, String grupo) {
-		if (!alunos.containsKey(matricula)) {
-			return "Aluno não cadastrado." + NL;
+	public boolean CadastraAluno(String matricula, String nome, String curso) {
+		if (hasAluno(matricula)) {
+			return false;
 		}
-		if (!grupos.containsKey(grupo)) {
-			return "Grupo não cadastrado." + NL;
+		alunos.put(matricula, new Aluno(matricula, nome, curso));
+		return true;
+	}
+
+	public Aluno consultaAluno(String matricula) {
+		if (hasAluno(matricula)) {
+			return alunos.get(matricula);
 		}
+		return null;
+	}
+
+	public boolean cadastraGrupo(String nome) {
+		if (hasGrupo(nome)) {
+			return false;
+		}
+		grupos.put(nome, new Grupo(nome));
+		return true;
+	}
+
+	public void alocaAluno(String matricula, String grupo) {
 		grupos.get(grupo).AlocaAluno((alunos.get(matricula)));
-
-		return "ALUNO ALOCADO!" + NL;
-
 	}
 
-	public String imprimeGrupo(String grupo) {
-		if (!grupos.containsKey(grupo)) {
-			return "Grupo não cadastrado." + NL;
+	public Grupo imprimeGrupo(String grupo) {
+		if (hasGrupo(grupo)) {
+			return grupos.get(grupo);
 		}
-		return grupos.get(grupo).toString();
+		return null;
 	}
 
-	public String alunoResponde(String matricula) {
-		if (alunos.containsKey(matricula)) {
+	public boolean alunoResponde(String matricula) {
+		if (hasAluno(matricula)) {
 			respostas.add(alunos.get(matricula));
-			return "ALUNO REGISTRADO!" + NL;
+			return true;
 		}
-		return "Aluno não cadastrado" + NL;
+		return false;
 	}
 
 	public String imprimeRespondoes() {

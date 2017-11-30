@@ -7,35 +7,31 @@ public class Aluno {
 	private String curso;
 
 	public Aluno(String matricula, String nome, String curso) {
-		if (matricula == null) {
-			throw new NullPointerException("Matrícula Inválida");
-		}
 
-		if (matricula.trim().isEmpty()) {
-			throw new IllegalArgumentException("Matrícula Inválida");
-		}
+		verificaNulo("Matrícula", matricula);
+		verificaNulo("Nome", nome);
+		verificaNulo("Curso", curso);		
+		verificaVazio("Matrícula", matricula);
+		verificaVazio("Nome", nome);
+		verificaVazio("Curso", curso);
 
-		if (nome == null) {
-			throw new NullPointerException("Nome Inválido");
-		}
-
-		if (nome.trim().isEmpty()) {
-			throw new IllegalArgumentException("Nome Inválida");
-		}
-
-		if (curso == null) {
-			throw new NullPointerException("Curso Inválido");
-		}
-
-		if (curso.trim().isEmpty()) {
-			throw new IllegalArgumentException("Curso Inválido");
-		}
-		
 		this.matricula = matricula;
 		this.nome = nome;
 		this.curso = curso;
 	}
 
+	private void verificaVazio(String tipo, String nome) {
+		if (nome.trim().isEmpty()) {
+			throw new IllegalArgumentException(tipo + " Vazio(a)");
+		}
+	}
+	
+	private void verificaNulo(String tipo, String nome) {
+		if (nome == null) {
+			throw new NullPointerException(tipo + " Nulo(a)");
+		}
+	}
+	
 	public String getMatricula() {
 		return matricula;
 	}
