@@ -1,6 +1,9 @@
-package entidades;
+package lab04;
 
 import java.util.Scanner;
+
+import lab04.entidades.*;
+import lab04.util.Menu;
 
 public class Main {
 	private static final String NL = System.lineSeparator();
@@ -27,7 +30,6 @@ public class Main {
 			case "C":
 				System.out.println(cadastra());
 				break;
-
 			case "E":
 				System.out.print(Menu.matricula());
 				matricula = sc.nextLine();
@@ -90,7 +92,7 @@ public class Main {
 		System.out.print(Menu.curso());
 		String curso = sc.nextLine();
 
-		if (controle.CadastraAluno(matricula, nome, curso)) {
+		if (controle.cadastraAluno(matricula, nome, curso)) {
 			return "Cadastro Realizado!" + NL;
 		}
 		return "Matrícula Já Cadastrada" + NL;

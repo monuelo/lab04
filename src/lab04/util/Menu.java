@@ -1,4 +1,4 @@
-package entidades;
+package lab04.util;
 
 public class Menu {
 	private static final String NL = System.lineSeparator();
@@ -21,7 +21,7 @@ public class Menu {
 		return "Nome: ";
 	}
 
-	public static String curso() {
+	public static String curso() {	
 		return "Curso: ";
 	}
 
@@ -32,4 +32,6 @@ public class Menu {
 	public static String grupo() {
 		return "Grupo: ";
 	}
+	
+	
 }

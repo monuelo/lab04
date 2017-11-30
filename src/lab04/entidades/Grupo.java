@@ -1,13 +1,17 @@
-package entidades;
+package lab04.entidades;
 
 import java.util.HashSet;
+import lab04.util.Testes;
 
 public class Grupo {
 	private String nome;
 	private HashSet<Aluno> alunos = new HashSet<>();
 
 	public Grupo(String nome) {
+		Testes.verificaNulo("Nome", nome);
+		Testes.verificaVazio("Nome", nome);
 		this.nome = nome;
+
 	}
 
 	public void AlocaAluno(Aluno aluno) {

@@ -1,4 +1,6 @@
-package entidades;
+package lab04.entidades;
+
+import lab04.util.Testes;;
 
 public class Aluno {
 
@@ -8,30 +10,18 @@ public class Aluno {
 
 	public Aluno(String matricula, String nome, String curso) {
 
-		verificaNulo("Matrícula", matricula);
-		verificaNulo("Nome", nome);
-		verificaNulo("Curso", curso);		
-		verificaVazio("Matrícula", matricula);
-		verificaVazio("Nome", nome);
-		verificaVazio("Curso", curso);
+		Testes.verificaNulo("Matrícula", matricula);
+		Testes.verificaNulo("Nome", nome);
+		Testes.verificaNulo("Curso", curso);
+		Testes.verificaVazio("Matrícula", matricula);
+		Testes.verificaVazio("Nome", nome);
+		Testes.verificaVazio("Curso", curso);
 
 		this.matricula = matricula;
 		this.nome = nome;
 		this.curso = curso;
 	}
 
-	private void verificaVazio(String tipo, String nome) {
-		if (nome.trim().isEmpty()) {
-			throw new IllegalArgumentException(tipo + " Vazio(a)");
-		}
-	}
-	
-	private void verificaNulo(String tipo, String nome) {
-		if (nome == null) {
-			throw new NullPointerException(tipo + " Nulo(a)");
-		}
-	}
-	
 	public String getMatricula() {
 		return matricula;
 	}
