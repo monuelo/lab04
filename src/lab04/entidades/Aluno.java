@@ -1,7 +1,5 @@
 package lab04.entidades;
 
-import lab04.util.Testes;;
-
 public class Aluno {
 
 	private String matricula;
@@ -9,14 +7,6 @@ public class Aluno {
 	private String curso;
 
 	public Aluno(String matricula, String nome, String curso) {
-
-		Testes.verificaNulo("Matrícula", matricula);
-		Testes.verificaNulo("Nome", nome);
-		Testes.verificaNulo("Curso", curso);
-		Testes.verificaVazio("Matrícula", matricula);
-		Testes.verificaVazio("Nome", nome);
-		Testes.verificaVazio("Curso", curso);
-
 		this.matricula = matricula;
 		this.nome = nome;
 		this.curso = curso;

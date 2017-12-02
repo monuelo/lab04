@@ -3,7 +3,7 @@ package lab04.entidades;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import lab04.util.Testes;
+import lab04.util.Validacao;
 
 public class Controle {
 
@@ -20,8 +20,6 @@ public class Controle {
 	}
 
 	public boolean hasAluno(String matricula) {
-		Testes.verificaNulo("Matrícula", matricula);
-		Testes.verificaVazio("Matrícula", matricula);
 		if (alunos.containsKey(matricula)) {
 			return true;
 		}
@@ -29,9 +27,6 @@ public class Controle {
 	}
 
 	public boolean hasGrupo(String nome) {
-		Testes.verificaNulo("Nome", nome);
-		Testes.verificaVazio("Nome", nome);
-
 		if (grupos.containsKey(nome)) {
 			return true;
 		}
@@ -39,13 +34,7 @@ public class Controle {
 	}
 
 	public boolean cadastraAluno(String matricula, String nome, String curso) {
-		Testes.verificaNulo("Matrícula", matricula);
-		Testes.verificaNulo("Nome", nome);
-		Testes.verificaNulo("Curso", curso);
-		Testes.verificaVazio("Matrícula", matricula);
-		Testes.verificaVazio("Nome", nome);
-		Testes.verificaVazio("Curso", curso);
-
+		Validacao.cadastraAlunoInvalido(matricula, nome, curso);
 		if (hasAluno(matricula)) {
 			return false;
 		}
@@ -55,9 +44,7 @@ public class Controle {
 	}
 
 	public Aluno consultaAluno(String matricula) {
-		Testes.verificaNulo("Matrícula", matricula);
-		Testes.verificaVazio("Matrícula", matricula);
-
+		Validacao.matriculaInvalida(matricula);
 		if (hasAluno(matricula)) {
 			return alunos.get(matricula);
 		}
@@ -65,9 +52,7 @@ public class Controle {
 	}
 
 	public boolean cadastraGrupo(String nome) {
-		Testes.verificaNulo("Nome", nome);
-		Testes.verificaVazio("Nome", nome);
-
+		Validacao.nomeDoGrupoInvalido(nome);
 		if (hasGrupo(nome)) {
 			return false;
 		}
@@ -76,18 +61,13 @@ public class Controle {
 	}
 
 	public void alocaAluno(String matricula, String grupo) {
-		Testes.verificaNulo("Matrícula", matricula);
-		Testes.verificaNulo("Nome", grupo);
-		Testes.verificaVazio("Matrícula", matricula);
-		Testes.verificaVazio("Nome", grupo);
-
-		grupos.get(grupo).AlocaAluno((alunos.get(matricula)));
+		Validacao.matriculaInvalida(matricula);
+		Validacao.nomeDoGrupoInvalido(grupo);
+		grupos.get(grupo).alocaAluno((alunos.get(matricula)));
 	}
 
 	public Grupo imprimeGrupo(String grupo) {
-		Testes.verificaNulo("Nome", grupo);
-		Testes.verificaVazio("Nome", grupo);
-
+		Validacao.nomeDoGrupoInvalido(grupo);
 		if (hasGrupo(grupo)) {
 			return grupos.get(grupo);
 		}
@@ -95,9 +75,7 @@ public class Controle {
 	}
 
 	public boolean alunoResponde(String matricula) {
-		Testes.verificaNulo("Matrícula", matricula);
-		Testes.verificaVazio("Matrícula", matricula);
-
+		Validacao.matriculaInvalida(matricula);
 		if (hasAluno(matricula)) {
 			respostas.add(matricula);
 			return true;

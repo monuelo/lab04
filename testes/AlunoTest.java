@@ -88,37 +88,5 @@ public class AlunoTest {
 		assertFalse(aluno.hashCode() == outroAluno.hashCode());
 		
 	}
-	@Test(expected = NullPointerException.class)
-	public void testMatriculaNula() {
-		aluno = new Aluno(null, "Gauds", "Computação");
-	}
-
-	@Test(expected = NullPointerException.class)
-	public void testNomeNulo() {
-		aluno = new Aluno("118", null, "Computação");
-	}
-
-	@Test(expected = NullPointerException.class)
-	public void testCursoNulo() {
-		aluno = new Aluno("118", "Gauds", null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testMatriculaVazia() {
-		aluno = new Aluno("", "Gauds", "Computação");
-		aluno = new Aluno("           ", "Gauds", "Computação");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testNomeVazio() {
-		aluno = new Aluno("118", "", "Computação");
-		aluno = new Aluno("118", "     ", "Computação");
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testCursoVazio() {
-		aluno = new Aluno("118", "Gauds", "");
-		aluno = new Aluno("118", "Gauds", "       ");
-	}
 
 }
