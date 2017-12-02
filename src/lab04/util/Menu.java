@@ -2,7 +2,7 @@ package lab04.util;
 
 public class Menu {
 	private static final String NL = System.lineSeparator();
-	
+
 	public static String menu() {
 		return "(C)adastrar Aluno" + NL + "(E)xibir Aluno" + NL + "(N)ovo Grupo" + NL
 				+ "(A)locar Aluno no Grupo e Imprimir Grupos" + NL + "(R)egistrar Resposta de Aluno" + NL
@@ -44,27 +44,28 @@ public class Menu {
 	public static String grupoJaCadastrado() {
 		return "Grupo já cadastrado." + NL;
 	}
-	
+
 	public static String grupoNaoCadastrado() {
 		return "Grupo não cadastrado." + NL;
 	}
-	
+
 	public static String alunoRegistrado() {
 		return "Aluno Registrado." + NL;
 	}
-	
+
 	public static String opcaoInvalida() {
 		return "Opção Inválida!" + NL;
 	}
-	
+
 	public static String matriculaJaCadastrada() {
 		return "Matrícula Já Cadastrada!" + NL;
 	}
-	
+
 	public static String alunoAlocado() {
 		return "Aluno Alocado!" + NL;
 	}
-public static String finalizando() {
-	return "Encerrando Programa...";
-}
+
+	public static String finalizando() {
+		return "Encerrando Programa...";
+	}
 }

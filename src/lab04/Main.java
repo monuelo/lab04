@@ -35,7 +35,7 @@ public class Main {
 				if (controle.consultaAluno(matricula) == null) {
 					System.out.println(Menu.alunoNaoCadastrado());
 				} else {
-					System.out.println(controle.consultaAluno(matricula).toString());
+					System.out.println(controle.consultaAluno(matricula));
 				}
 				break;
 
@@ -116,7 +116,7 @@ public class Main {
 			System.out.print(Menu.grupo());
 			String nome = sc.nextLine();
 			if (!(controle.imprimeGrupo(nome) == null)) {
-				return controle.imprimeGrupo(nome).toString();
+				return controle.imprimeGrupo(nome);
 			} else {
 				return Menu.grupoNaoCadastrado();
 			}

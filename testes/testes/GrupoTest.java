@@ -1,3 +1,4 @@
+package testes;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -26,16 +27,20 @@ public class GrupoTest {
 		grupo = new Grupo("monitores");
 		Aluno a = new Aluno("117", "HemiAlgumaCoisa", "CC");
 		Aluno b = new Aluno("118", "PericlesFuturoMonitor", "CC");
+		
 		// Antes de alocar o aluno "a".
 		assertTrue(grupo.getAlunos().size() == 0);
 		grupo.alocaAluno(a);
+		
 		// Após alocar o aluno "a".
 		assertTrue(grupo.getAlunos().size() == 1);
 		assertTrue(grupo.getAlunos().contains(a));
+		
 		// Garantir que o aluno só pode ser inserido uma vez.
 		grupo.alocaAluno(a);
 		assertTrue(grupo.getAlunos().size() == 1);
 		assertTrue(grupo.getAlunos().contains(a));
+		
 		// Verificar a adição efetiva de alunos diferentes.
 		grupo.alocaAluno(b);
 		assertTrue(grupo.getAlunos().size() == 2);
@@ -53,8 +58,10 @@ public class GrupoTest {
 		grupo = new Grupo("Miniaturas da sala de gauds");
 		Aluno a = new Aluno("117", "Gauds", "CC");
 		HashSet<Aluno> set = new HashSet<>();
+		
 		// Obtendo um HashSet Vazio.
 		assertEquals(set, grupo.getAlunos());
+		
 		// Verificando o retorno com elementos no HashSet
 		set.add(a);
 		grupo.alocaAluno(a);

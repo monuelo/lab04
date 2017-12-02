@@ -19,6 +19,18 @@ public class Controle {
 		this.respostas = new ArrayList<>();
 	}
 
+	public HashMap<String, Aluno> getAlunos() {
+		return alunos;
+	}
+
+	public HashMap<String, Grupo> getGrupos() {
+		return grupos;
+	}
+
+	public ArrayList<String> getRespostas() {
+		return respostas;
+	}
+
 	public boolean hasAluno(String matricula) {
 		if (alunos.containsKey(matricula)) {
 			return true;
@@ -27,7 +39,7 @@ public class Controle {
 	}
 
 	public boolean hasGrupo(String nome) {
-		if (grupos.containsKey(nome)) {
+		if (grupos.containsKey(nome.toLowerCase())) {
 			return true;
 		}
 		return false;
@@ -35,6 +47,7 @@ public class Controle {
 
 	public boolean cadastraAluno(String matricula, String nome, String curso) {
 		Validacao.cadastraAlunoInvalido(matricula, nome, curso);
+
 		if (hasAluno(matricula)) {
 			return false;
 		}
@@ -43,39 +56,44 @@ public class Controle {
 		return true;
 	}
 
-	public Aluno consultaAluno(String matricula) {
+	public String consultaAluno(String matricula) {
 		Validacao.matriculaInvalida(matricula);
 		if (hasAluno(matricula)) {
-			return alunos.get(matricula);
+			return alunos.get(matricula).toString();
 		}
 		return null;
 	}
 
 	public boolean cadastraGrupo(String nome) {
 		Validacao.nomeDoGrupoInvalido(nome);
+
 		if (hasGrupo(nome)) {
 			return false;
 		}
-		grupos.put(nome, new Grupo(nome));
+		grupos.put(nome.toLowerCase(), new Grupo(nome));
 		return true;
 	}
 
 	public void alocaAluno(String matricula, String grupo) {
 		Validacao.matriculaInvalida(matricula);
 		Validacao.nomeDoGrupoInvalido(grupo);
-		grupos.get(grupo).alocaAluno((alunos.get(matricula)));
+
+		grupos.get(grupo.toLowerCase()).alocaAluno((alunos.get(matricula)));
+
 	}
 
-	public Grupo imprimeGrupo(String grupo) {
+	public String imprimeGrupo(String grupo) {
 		Validacao.nomeDoGrupoInvalido(grupo);
+
 		if (hasGrupo(grupo)) {
-			return grupos.get(grupo);
+			return grupos.get(grupo.toLowerCase()).toString();
 		}
 		return null;
 	}
 
 	public boolean alunoResponde(String matricula) {
 		Validacao.matriculaInvalida(matricula);
+
 		if (hasAluno(matricula)) {
 			respostas.add(matricula);
 			return true;
@@ -84,7 +102,7 @@ public class Controle {
 	}
 
 	public String imprimeRespondoes() {
-		String retorno = "Alunos: " + NL;
+		String retorno = "Alunos:" + NL;
 		for (int i = 0; i < respostas.size(); i++) {
 			retorno += i + 1 + ". " + consultaAluno(respostas.get(i)).toString() + NL;
 		}
