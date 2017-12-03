@@ -14,15 +14,17 @@ import lab04.util.Menu;
  *
  */
 public class Main {
+
 	private static Controller controle = new Controller();
 	private static Scanner sc = new Scanner(System.in);
+	private static Menu menu = new Menu();
 
 	public static void main(String[] args) {
 		String matricula;
 		String operacao;
 
 		do {
-			System.out.print(Menu.menu());
+			System.out.print(menu.menu());
 			operacao = sc.nextLine().toUpperCase();
 
 			if (operacao == null) {
@@ -34,37 +36,37 @@ public class Main {
 			}
 
 			switch (operacao) {
-			
+
 			case "C":
 				System.out.println(cadastra());
 				break;
-		
+
 			case "E":
-				System.out.print(Menu.matricula());
+				System.out.print(menu.matricula());
 				matricula = sc.nextLine();
-			
+
 				if (controle.consultaAluno(matricula) == null) {
-					System.out.println(Menu.alunoNaoCadastrado());
+					System.out.println(menu.alunoNaoCadastrado());
 				} else {
 					System.out.println(controle.consultaAluno(matricula));
 				}
-				
+
 				break;
 
 			case "N":
-				System.out.print(Menu.grupo());
+				System.out.print(menu.grupo());
 				String grupo = sc.nextLine();
-				
+
 				if (controle.cadastraGrupo(grupo)) {
-					System.out.println(Menu.cadastroRealizado());
+					System.out.println(menu.cadastroRealizado());
 				} else {
-					System.out.println(Menu.grupoJaCadastrado());
+					System.out.println(menu.grupoJaCadastrado());
 				}
-				
+
 				break;
 
 			case "A":
-				System.out.println(Menu.menuAlocacao());
+				System.out.println(menu.menuAlocacao());
 				String opcao = sc.nextLine().toUpperCase();
 
 				if (opcao.equals("A")) {
@@ -72,19 +74,19 @@ public class Main {
 				} else if (opcao.equals("I")) {
 					System.out.println(imprime());
 				} else {
-					System.out.println(Menu.opcaoInvalida());
+					System.out.println(menu.opcaoInvalida());
 				}
-				
+
 				break;
 
 			case "R":
-				System.out.print(Menu.matricula());
+				System.out.print(menu.matricula());
 				matricula = sc.nextLine();
 
 				if (controle.alunoResponde(matricula)) {
-					System.out.println(Menu.alunoRegistrado());
+					System.out.println(menu.alunoRegistrado());
 				} else {
-					System.out.println(Menu.alunoNaoCadastrado());
+					System.out.println(menu.alunoNaoCadastrado());
 				}
 
 				break;
@@ -94,11 +96,11 @@ public class Main {
 				break;
 
 			case "O":
-				System.out.println(Menu.finalizando());
+				System.out.println(menu.finalizando());
 				break;
 
 			default:
-				System.out.println(Menu.opcaoInvalida());
+				System.out.println(menu.opcaoInvalida());
 			}
 
 		} while (!operacao.equals("O"));
@@ -110,52 +112,57 @@ public class Main {
 	 * @return uma String que informa se o cadastro foi realizado ou não.
 	 */
 	public static String cadastra() {
-		System.out.print(Menu.matricula());
+		System.out.print(menu.matricula());
 		String matricula = sc.nextLine();
 
-		System.out.print(Menu.nome());
+		System.out.print(menu.nome());
 		String nome = sc.nextLine();
 
-		System.out.print(Menu.curso());
+		System.out.print(menu.curso());
 		String curso = sc.nextLine();
 
 		if (controle.cadastraAluno(matricula, nome, curso)) {
-			return Menu.cadastroRealizado();
+			return menu.cadastroRealizado();
 		}
-		return Menu.matriculaJaCadastrada();
+		return menu.matriculaJaCadastrada();
 	}
 
 	/**
-	 * Lê os dados de Entrada, e aloca um alun a um grupo, caso possível ou imprime
+	 * Lê os dados de Entrada, e aloca um alun a um grupo, caso possível. ou imprime
 	 * o grupo. Dependendo do que foi inserido.
 	 * 
 	 * @return uma String que informa se método
 	 */
 	public static String aloca() {
-		System.out.print(Menu.matricula());
+		System.out.print(menu.matricula());
 		String matricula = sc.nextLine();
-		
-		System.out.print(Menu.grupo());
+
+		System.out.print(menu.grupo());
 		String grupo = sc.nextLine();
-		
+
 		if (!controle.hasAluno(matricula)) {
-			return Menu.alunoNaoCadastrado();
+			return menu.alunoNaoCadastrado();
 		}
 		if (!controle.hasGrupo(grupo)) {
-			return Menu.grupoNaoCadastrado();
+			return menu.grupoNaoCadastrado();
 		}
 		controle.alocaAluno(matricula, grupo);
-		return Menu.alunoAlocado();
+		return menu.alunoAlocado();
 	}
 
+	/**
+	 * Imprime a representação em string de um grupo dado na entrada.
+	 * 
+	 * @return uma String que representa um grupo.
+	 */
 	public static String imprime() {
-		System.out.print(Menu.grupo());
+		System.out.print(menu.grupo());
 		String nome = sc.nextLine();
-		
+
 		if (!(controle.imprimeGrupo(nome) == null)) {
 			return controle.imprimeGrupo(nome);
 		} else {
-			return Menu.grupoNaoCadastrado();
+			return menu.grupoNaoCadastrado();
 		}
 	}
 }

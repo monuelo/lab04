@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashSet;
-
 import org.junit.Test;
 
 import lab04.entidades.Aluno;
@@ -21,7 +19,7 @@ import lab04.entidades.Grupo;
  */
 public class GrupoTest {
 
-	Grupo grupo, outroGrupo;
+	private Grupo grupo, outroGrupo;
 
 	/**
 	 * Testa o construtor de um grupo.
@@ -43,22 +41,24 @@ public class GrupoTest {
 		Aluno b = new Aluno("118", "PericlesFuturoMonitor", "CC");
 
 		// Antes de alocar o aluno "a".
-		assertTrue(grupo.getAlunos().size() == 0);
-		grupo.alocaAluno(a);
-
+		assertEquals("Alunos do grupo monitores:" + System.lineSeparator(), grupo.toString());
 		// Após alocar o aluno "a".
-		assertTrue(grupo.getAlunos().size() == 1);
-		assertTrue(grupo.getAlunos().contains(a));
+		grupo.alocaAluno(a);
+		assertEquals("Alunos do grupo monitores:" + System.lineSeparator() + "* 117 - HemiAlgumaCoisa - CC"
+				+ System.lineSeparator(), grupo.toString());
 
 		// Garantir que o aluno só pode ser inserido uma vez.
 		grupo.alocaAluno(a);
-		assertTrue(grupo.getAlunos().size() == 1);
-		assertTrue(grupo.getAlunos().contains(a));
+		assertEquals("Alunos do grupo monitores:" + System.lineSeparator() + "* 117 - HemiAlgumaCoisa - CC"
+				+ System.lineSeparator(), grupo.toString());
 
 		// Verificar a adição efetiva de alunos diferentes.
 		grupo.alocaAluno(b);
-		assertTrue(grupo.getAlunos().size() == 2);
-		assertTrue(grupo.getAlunos().contains(b));
+		assertEquals(
+				"Alunos do grupo monitores:" + System.lineSeparator() + "* 117 - HemiAlgumaCoisa - CC"
+						+ System.lineSeparator() + "* 118 - PericlesFuturoMonitor - CC" + System.lineSeparator(),
+				grupo.toString());
+
 	}
 
 	/**
@@ -73,20 +73,6 @@ public class GrupoTest {
 	/**
 	 * Testa o método get para o Set de alunos do grupo.
 	 */
-	@Test
-	public void testGetAlunos() {
-		grupo = new Grupo("Miniaturas da sala de gauds");
-		Aluno a = new Aluno("117", "Gauds", "CC");
-		HashSet<Aluno> set = new HashSet<>();
-
-		// Obtendo um HashSet Vazio.
-		assertEquals(set, grupo.getAlunos());
-
-		// Verificando o retorno com elementos no HashSet
-		set.add(a);
-		grupo.alocaAluno(a);
-		assertEquals(set, grupo.getAlunos());
-	}
 
 	/**
 	 * Testa o método hashCode, quando os grupos possuem hashCodes iguais.
@@ -127,7 +113,6 @@ public class GrupoTest {
 		outroGrupo = new Grupo("SHOW");
 		assertTrue(grupo.equals(outroGrupo));
 	}
-
 
 	/*
 	 * Testa o método Equals quando os grupos possuem nomes diferentes.

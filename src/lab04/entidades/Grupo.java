@@ -45,15 +45,6 @@ public class Grupo {
 	}
 
 	/**
-	 * Método get para o Set de alunos do Grupo.
-	 * 
-	 * @return o Set de alunos que integram o grupo.
-	 */
-	public HashSet<Aluno> getAlunos() {
-		return alunos;
-	}
-
-	/**
 	 * Retorna a representação em String de um grupo. A representação segue o
 	 * formato: 
 	 * "Alunos do Grupo (nome): 

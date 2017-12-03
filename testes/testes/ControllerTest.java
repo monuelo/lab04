@@ -16,7 +16,8 @@ import lab04.entidades.Controller;
  *
  */
 public class ControllerTest {
-	Controller controle, outroControle;
+	private Controller controle, outroControle;
+	private final String NL = System.lineSeparator();
 
 	/**
 	 * Inicializa o Controller controle.
@@ -64,22 +65,14 @@ public class ControllerTest {
 	 */
 	@Test
 	public void testCadastraAluno() {
-		// Verifica o tamanho antes do cadastro.
-		assertTrue(controle.getAlunos().size() == 0);
-
 		// Verificação pós cadastro.
 		assertTrue(controle.cadastraAluno("123", "Pericles", "Exaltasamba"));
-		assertTrue(controle.getAlunos().size() == 1);
 
 		// Garante que alunos de mesma matrícula não se matriculem mais de uma vez.
-		assertTrue(controle.getAlunos().containsKey("123"));
 		assertFalse(controle.cadastraAluno("123", "Matheus", "Goderagem"));
-		assertTrue(controle.getAlunos().size() == 1);
 
 		// Verifica o cadastro de outros alunos.
 		assertTrue(controle.cadastraAluno("124", "Hemi", "CC"));
-		assertTrue(controle.getAlunos().size() == 2);
-		assertTrue(controle.getAlunos().containsKey("124"));
 	}
 
 	/**
@@ -98,23 +91,15 @@ public class ControllerTest {
 	 */
 	@Test
 	public void testCadastraGrupo() {
-		// Verifica o tamanho antes do cadastro.
-		assertTrue(controle.getGrupos().size() == 0);
-
 		// Garante que o grupo foi cadastrado.
 		assertTrue(controle.cadastraGrupo("YoFans"));
-		assertTrue(controle.getGrupos().containsKey("yofans"));
-		assertTrue(controle.getGrupos().size() == 1);
 
 		// Garante que grupos de mesmo nome não sejam cadastrados novamente.
 		// --- Insensitive Case.
 		assertFalse(controle.cadastraGrupo("yofans"));
-		assertTrue(controle.getGrupos().size() == 1);
 
 		// Verifica o cadastro de grupos diferentes.
 		assertTrue(controle.cadastraGrupo("AtalEhRasgado"));
-		assertTrue(controle.getGrupos().containsKey("atalehrasgado"));
-		assertTrue(controle.getGrupos().size() == 2);
 
 	}
 
@@ -123,24 +108,25 @@ public class ControllerTest {
 	 */
 	@Test
 	public void testAlocaAluno() {
-		// Verifica o tamanho antes da alocação.
+		// Verifica o Set antes da alocação.
 		controle.cadastraAluno("123", "Picles", "CC");
 		controle.cadastraGrupo("Testano");
-		assertTrue(controle.getGrupos().get("testano").getAlunos().size() == 0);
+		assertEquals("Alunos do grupo Testano:" + NL, controle.imprimeGrupo("testano"));
 
 		// Verifica a alocação do aluno no grupo.
 		controle.alocaAluno("123", "Testano");
-		assertTrue(controle.getGrupos().get("testano").getAlunos().size() == 1);
+		assertEquals("Alunos do grupo Testano:" + NL + "* 123 - Picles - CC" + NL, controle.imprimeGrupo("testano"));
 
 		// Garante que o mesmo aluno não pode ser alocado mais de uma vez no mesmo
 		// grupo.
 		controle.alocaAluno("123", "Testano");
-		assertTrue(controle.getGrupos().get("testano").getAlunos().size() == 1);
+		assertEquals("Alunos do grupo Testano:" + NL + "* 123 - Picles - CC" + NL, controle.imprimeGrupo("testano"));
 
 		// Verifica a alocação de alunos diferentes.
 		controle.cadastraAluno("124", "13900ip", "Games");
 		controle.alocaAluno("124", "Testano");
-		assertTrue(controle.getGrupos().get("testano").getAlunos().size() == 2);
+		assertEquals("Alunos do grupo Testano:" + NL + "* 123 - Picles - CC" + NL + "* 124 - 13900ip - Games" + NL,
+				controle.imprimeGrupo("testano"));
 
 	}
 
@@ -150,7 +136,7 @@ public class ControllerTest {
 	@Test
 	public void testImprimeGrupoVazio() {
 		controle.cadastraGrupo("Sla");
-		assertEquals("Alunos do grupo Sla:" + System.lineSeparator(), controle.imprimeGrupo("Sla"));
+		assertEquals("Alunos do grupo Sla:" + NL, controle.imprimeGrupo("Sla"));
 
 	}
 
@@ -166,14 +152,14 @@ public class ControllerTest {
 		// Verifica o retorno quando existe um aluno no grupo.
 		controle.cadastraAluno("123", "PraQNome", "CC");
 		controle.alocaAluno("123", "Sla");
-		assertEquals("Alunos do grupo Sla:" + System.lineSeparator() + "* 123 - PraQNome - CC" + System.lineSeparator(),
-				controle.imprimeGrupo("Sla"));
+		assertEquals("Alunos do grupo Sla:" + NL + "* 123 - PraQNome - CC" + NL, controle.imprimeGrupo("Sla"));
 
 		// Verifica o retorno quando existe mais de um aluno no grupo.
 		controle.cadastraAluno("1234", "I Have a name", "Humanax");
 		controle.alocaAluno("1234", "Sla");
-		assertEquals("Alunos do grupo Sla:" + System.lineSeparator() + "* 123 - PraQNome - CC" + System.lineSeparator()
-				+ "* 1234 - I Have a name - Humanax" + System.lineSeparator(), controle.imprimeGrupo("Sla"));
+		assertEquals(
+				"Alunos do grupo Sla:" + NL + "* 123 - PraQNome - CC" + NL + "* 1234 - I Have a name - Humanax" + NL,
+				controle.imprimeGrupo("Sla"));
 	}
 
 	/**
@@ -181,24 +167,24 @@ public class ControllerTest {
 	 */
 	@Test
 	public void testAlunoResponde() {
-		// Verifica retorno quando aluno não existe.
 		assertFalse(controle.alunoResponde("125"));
-
-		// Garante o cadastro da resposta de um aluno.
 		controle.cadastraAluno("125", "Anne Anjo", "Doceria");
-		controle.alunoResponde("125");
-		assertTrue(controle.getRespondoes().size() == 1);
-		assertTrue(controle.getRespondoes().contains("125"));
 
-		// Garante o cadastro da resposta de mais de um aluno.
+		// Garante o registro da resposta de um aluno.
+		controle.alunoResponde("125");
+		assertEquals("Alunos:" + NL + "1. 125 - Anne Anjo - Doceria" + NL, controle.imprimeRespondoes());
+
+		// Garante o registro da resposta de mais de um aluno.
 		controle.cadastraAluno("126", "Anne Querubim", "Doceria");
 		controle.alunoResponde("126");
-		assertTrue(controle.getRespondoes().size() == 2);
-		assertTrue(controle.getRespondoes().contains("126"));
+		assertEquals("Alunos:" + NL + "1. 125 - Anne Anjo - Doceria" + NL + "2. 126 - Anne Querubim - Doceria" + NL,
+				controle.imprimeRespondoes());
 
 		// Garante que um aluno pode responder mais de uma vez.
 		controle.alunoResponde("125");
-		assertTrue(controle.getRespondoes().size() == 3);
+		assertEquals("Alunos:" + NL + "1. 125 - Anne Anjo - Doceria" + NL + "2. 126 - Anne Querubim - Doceria" + NL
+				+ "3. 125 - Anne Anjo - Doceria" + NL, controle.imprimeRespondoes());
+
 	}
 
 	/**
@@ -206,7 +192,7 @@ public class ControllerTest {
 	 */
 	@Test
 	public void testImprimeRespondoesVazio() {
-		assertEquals("Alunos:" + System.lineSeparator(), controle.imprimeRespondoes());
+		assertEquals("Alunos:" + NL, controle.imprimeRespondoes());
 
 	}
 
@@ -219,20 +205,19 @@ public class ControllerTest {
 		// Verifica o retorno quando um aluno respondeu.
 		controle.cadastraAluno("125", "Anne Arcanjo", "QueroDoce");
 		controle.alunoResponde("125");
-		assertEquals("Alunos:" + System.lineSeparator() + "1. 125 - Anne Arcanjo - QueroDoce" + System.lineSeparator(),
-				controle.imprimeRespondoes());
+		assertEquals("Alunos:" + NL + "1. 125 - Anne Arcanjo - QueroDoce" + NL, controle.imprimeRespondoes());
 
 		// Verifica o retorno quando mais de um aluno respondeu.
 		controle.cadastraAluno("126", "Hemi do pote", "BoloDePote");
 		controle.alunoResponde("126");
-		assertEquals("Alunos:" + System.lineSeparator() + "1. 125 - Anne Arcanjo - QueroDoce" + System.lineSeparator()
-				+ "2. 126 - Hemi do pote - BoloDePote" + System.lineSeparator(), controle.imprimeRespondoes());
+		assertEquals(
+				"Alunos:" + NL + "1. 125 - Anne Arcanjo - QueroDoce" + NL + "2. 126 - Hemi do pote - BoloDePote" + NL,
+				controle.imprimeRespondoes());
 
 		// Verifica o retorno quando um aluno responde mais de uma vez.
 		controle.alunoResponde("125");
-		assertEquals("Alunos:" + System.lineSeparator() + "1. 125 - Anne Arcanjo - QueroDoce" + System.lineSeparator()
-				+ "2. 126 - Hemi do pote - BoloDePote" + System.lineSeparator() + "3. 125 - Anne Arcanjo - QueroDoce"
-				+ System.lineSeparator(), controle.imprimeRespondoes());
+		assertEquals("Alunos:" + NL + "1. 125 - Anne Arcanjo - QueroDoce" + NL + "2. 126 - Hemi do pote - BoloDePote"
+				+ NL + "3. 125 - Anne Arcanjo - QueroDoce" + NL, controle.imprimeRespondoes());
 
 	}
 

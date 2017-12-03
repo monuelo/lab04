@@ -17,7 +17,7 @@ public class Validacao {
 	 * @param matricula
 	 *            A String a ser verificada.
 	 */
-	public static void matriculaInvalida(String matricula) {
+	public void matriculaInvalida(String matricula) {
 		if (matricula == null) {
 			throw new NullPointerException("Matrícula Nula");
 		}
@@ -33,7 +33,7 @@ public class Validacao {
 	 * @param nomeDoGrupo
 	 *            A String a ser verificada.
 	 */
-	public static void nomeDoGrupoInvalido(String nomeDoGrupo) {
+	public void nomeDoGrupoInvalido(String nomeDoGrupo) {
 		if (nomeDoGrupo == null) {
 			throw new NullPointerException("Nome Nulo");
 		}
@@ -53,7 +53,7 @@ public class Validacao {
 	 * @param curso
 	 *            O curso do aluno.
 	 */
-	public static void cadastraAlunoInvalido(String matricula, String nome, String curso) {
+	public void cadastraAlunoInvalido(String matricula, String nome, String curso) {
 		if (matricula == null) {
 			throw new NullPointerException("Matrícula Nula");
 		}

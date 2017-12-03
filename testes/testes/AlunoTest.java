@@ -16,7 +16,7 @@ import lab04.entidades.Aluno;
  */
 public class AlunoTest {
 
-	Aluno aluno, outroAluno;
+	private Aluno aluno, outroAluno;
 
 	/**
 	 * Testa o Construtor da classe Aluno.

@@ -10,14 +10,14 @@ package lab04.util;
  *
  */
 public class Menu {
-	private static final String NL = System.lineSeparator();
+	private final String NL = System.lineSeparator();
 
 	/**
 	 * Lista as possíveis operações a serem realizadas.
 	 * 
 	 * @return uma string com as operações.
 	 */
-	public static String menu() {
+	public String menu() {
 		return "(C)adastrar Aluno" + NL + "(E)xibir Aluno" + NL + "(N)ovo Grupo" + NL
 				+ "(A)locar Aluno no Grupo e Imprimir Grupos" + NL + "(R)egistrar Resposta de Aluno" + NL
 				+ "(I)mprimir Alunos que Responderam" + NL + "(O)ra, vamos fechar o programa!" + NL + NL + "Opção > ";
@@ -28,7 +28,7 @@ public class Menu {
 	 * 
 	 * @return uma String com as operações.
 	 */
-	public static String menuAlocacao() {
+	public String menuAlocacao() {
 		return "(A)locar Aluno ou (I)mprimir Grupo? ";
 	}
 
@@ -37,7 +37,7 @@ public class Menu {
 	 * 
 	 * @return a string "Matricula: ".
 	 */
-	public static String matricula() {
+	public String matricula() {
 		return "Matricula: ";
 	}
 
@@ -46,7 +46,7 @@ public class Menu {
 	 * 
 	 * @return a string "Nome: ".
 	 */
-	public static String nome() {
+	public String nome() {
 		return "Nome: ";
 	}
 
@@ -55,7 +55,7 @@ public class Menu {
 	 * 
 	 * @return a string "Curso: ".
 	 */
-	public static String curso() {
+	public String curso() {
 		return "Curso: ";
 	}
 
@@ -64,7 +64,7 @@ public class Menu {
 	 * 
 	 * @return a string "Aluno: ".
 	 */
-	public static String aluno() {
+	public String aluno() {
 		return "Aluno: ";
 	}
 
@@ -73,7 +73,7 @@ public class Menu {
 	 * 
 	 * @return a string "Grupo: ".
 	 */
-	public static String grupo() {
+	public String grupo() {
 		return "Grupo: ";
 	}
 
@@ -82,7 +82,7 @@ public class Menu {
 	 * 
 	 * @return a string "Aluno não cadastrado!".
 	 */
-	public static String alunoNaoCadastrado() {
+	public String alunoNaoCadastrado() {
 		return "Aluno não cadastrado!" + NL;
 	}
 
@@ -91,7 +91,7 @@ public class Menu {
 	 * 
 	 * @return a string "Cadastro Realizado.".
 	 */
-	public static String cadastroRealizado() {
+	public String cadastroRealizado() {
 		return "Cadastro Realizado." + NL;
 	}
 
@@ -100,7 +100,7 @@ public class Menu {
 	 * 
 	 * @return a string "Grupo já cadastrado!".
 	 */
-	public static String grupoJaCadastrado() {
+	public String grupoJaCadastrado() {
 		return "Grupo já cadastrado!" + NL;
 	}
 
@@ -109,7 +109,7 @@ public class Menu {
 	 * 
 	 * @return a string "Grupo não cadastrado!".
 	 */
-	public static String grupoNaoCadastrado() {
+	public String grupoNaoCadastrado() {
 		return "Grupo não cadastrado!" + NL;
 	}
 
@@ -118,7 +118,7 @@ public class Menu {
 	 * 
 	 * @return a string "Aluno Registrado".
 	 */
-	public static String alunoRegistrado() {
+	public String alunoRegistrado() {
 		return "Aluno Registrado." + NL;
 	}
 
@@ -127,7 +127,7 @@ public class Menu {
 	 * 
 	 * @return a string "Opção Inválida!".
 	 */
-	public static String opcaoInvalida() {
+	public String opcaoInvalida() {
 		return "Opção Inválida!" + NL;
 	}
 
@@ -136,7 +136,7 @@ public class Menu {
 	 * 
 	 * @return a string "Matrícula Já Cadastrada!".
 	 */
-	public static String matriculaJaCadastrada() {
+	public String matriculaJaCadastrada() {
 		return "Matrícula Já Cadastrada!" + NL;
 	}
 
@@ -145,7 +145,7 @@ public class Menu {
 	 * 
 	 * @return a string "Aluno alocado!".
 	 */
-	public static String alunoAlocado() {
+	public String alunoAlocado() {
 		return "Aluno Alocado!" + NL;
 	}
 
@@ -154,7 +154,7 @@ public class Menu {
 	 * 
 	 * @return a string "Encerrando Programa...".
 	 */
-	public static String finalizando() {
+	public String finalizando() {
 		return "Encerrando Programa...";
 	}
 }

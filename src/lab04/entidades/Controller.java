@@ -17,11 +17,12 @@ import lab04.util.Validacao;
  */
 public class Controller {
 
-	private static final String NL = System.lineSeparator();
+	private final String NL = System.lineSeparator();
 
 	private HashMap<String, Aluno> alunos;
 	private HashMap<String, Grupo> grupos;
 	private ArrayList<String> respondoes;
+	private Validacao validacao;
 
 	/**
 	 * Constrói um Controller e inicializa seu array e mapas.
@@ -30,33 +31,7 @@ public class Controller {
 		this.alunos = new HashMap<>();
 		this.grupos = new HashMap<>();
 		this.respondoes = new ArrayList<>();
-	}
-
-	/**
-	 * Método get para o mapa de Alunos.
-	 * 
-	 * @return o mapa que contém os alunos.
-	 */
-	public HashMap<String, Aluno> getAlunos() {
-		return alunos;
-	}
-
-	/**
-	 * Método get para o mapa de Grupos.
-	 * 
-	 * @return o mapa que contém os grupos.
-	 */
-	public HashMap<String, Grupo> getGrupos() {
-		return grupos;
-	}
-
-	/**
-	 * Método get para a lista de alunos que responderam.
-	 * 
-	 * @return o Set de alunos que integram o grupo.
-	 */
-	public ArrayList<String> getRespondoes() {
-		return respondoes;
+		this.validacao = new Validacao();
 	}
 
 	/**
@@ -100,7 +75,7 @@ public class Controller {
 	 * @return um boolean que indica se foi possível cadastrar ou não.
 	 */
 	public boolean cadastraAluno(String matricula, String nome, String curso) {
-		Validacao.cadastraAlunoInvalido(matricula, nome, curso);
+		validacao.cadastraAlunoInvalido(matricula, nome, curso);
 
 		if (hasAluno(matricula)) {
 			return false;
@@ -119,7 +94,7 @@ public class Controller {
 	 * @return a representação em String do aluno.
 	 */
 	public String consultaAluno(String matricula) {
-		Validacao.matriculaInvalida(matricula);
+		validacao.matriculaInvalida(matricula);
 		if (hasAluno(matricula)) {
 			return alunos.get(matricula).toString();
 		}
@@ -135,7 +110,7 @@ public class Controller {
 	 * @return um boolean que indica se foi possível cadastrar o grupo ou não.
 	 */
 	public boolean cadastraGrupo(String nome) {
-		Validacao.nomeDoGrupoInvalido(nome);
+		validacao.nomeDoGrupoInvalido(nome);
 
 		if (hasGrupo(nome)) {
 			return false;
@@ -154,8 +129,8 @@ public class Controller {
 	 *            O nome do grupo que vai receber o aluno.
 	 */
 	public void alocaAluno(String matricula, String grupo) {
-		Validacao.matriculaInvalida(matricula);
-		Validacao.nomeDoGrupoInvalido(grupo);
+		validacao.matriculaInvalida(matricula);
+		validacao.nomeDoGrupoInvalido(grupo);
 
 		grupos.get(grupo.toLowerCase()).alocaAluno((alunos.get(matricula)));
 
@@ -169,7 +144,7 @@ public class Controller {
 	 * @return a representação em String do grupo.
 	 */
 	public String imprimeGrupo(String grupo) {
-		Validacao.nomeDoGrupoInvalido(grupo);
+		validacao.nomeDoGrupoInvalido(grupo);
 
 		if (hasGrupo(grupo)) {
 			return grupos.get(grupo.toLowerCase()).toString();
@@ -187,7 +162,7 @@ public class Controller {
 	 *         não, caso a matrícula seja inválida.
 	 */
 	public boolean alunoResponde(String matricula) {
-		Validacao.matriculaInvalida(matricula);
+		validacao.matriculaInvalida(matricula);
 
 		if (hasAluno(matricula)) {
 			respondoes.add(matricula);
@@ -198,9 +173,8 @@ public class Controller {
 
 	/**
 	 * Imprime todos os alunos que responderam ordenados, com sua representação em
-	 * String. A representação segue o formato: 
-	 * "Alunos: 
-	 * (ordem de resposta). matrícula - nome - curso.
+	 * String. A representação segue o formato: "Alunos: (ordem de resposta).
+	 * matrícula - nome - curso.
 	 * 
 	 * @return
 	 */
