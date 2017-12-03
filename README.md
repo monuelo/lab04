@@ -1,6 +1,8 @@
 # Laboratório 4 - Programação II - UFCG
 *Turma 02 - Matheus Gaudêncio*
 
+[Diagrama](#Diagrama)
+
 ![logo](http://www.dsc.ufcg.edu.br/~sacc/img/logo-topo2.png)
 ### Descrição
 Controle de Alunos
@@ -10,7 +12,7 @@ Controle de Alunos
 
 *Por fim, durante as aulas, os alunos costumam fazer exercícios em quadro e responder perguntas feitas pelo professor. O professor deseja manter um registro dos alunos que responderam tais perguntas. É possível que o mesmo aluno seja questionado mais que uma vez e preciso registrar a ordem que os mesmos responderam.*
 
-## Diagrama de Classes
+## <a name="Diagrama"></a>Diagrama de Classes
 ![Diagrama](https://i.imgur.com/Lc0DDTb.png)
 
 ## @Author Héricles Emanuel - Computação@UFCG
