@@ -21,6 +21,7 @@ Controle de Alunos
 ![Diagrama](https://i.imgur.com/Lc0DDTb.png)
 
 ### <a name="Links"><a/>Links
+  ----------------------------------------------------------------------------------------------------------
 [<img src="https://image.flaticon.com/icons/svg/25/25231.svg" width="60">](http://github.com/hericlesme)
-
-## @Author Héricles Emanuel - Computação@UFCG
+[<img src="http://www.dsc.ufcg.edu.br/~sacc/img/logo-topo2.png" width="300">](http://www.computacao.ufcg.edu.br/)
+### _@Author Héricles Emanuel - Computação@UFCG_
