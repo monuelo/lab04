@@ -1,7 +1,22 @@
 package lab04.util;
 
+/**
+ * Classe de Validação de Entradas. Verifica entradas inválidas e lança
+ * exceções, caso sejam.
+ *
+ * Lab04 - Laboratório de Programação II
+ * 
+ * @author Héricles Emanuel - 117110647
+ *
+ */
 public class Validacao {
 
+	/**
+	 * Verifica se uma matrícula é nula ou vazia.
+	 * 
+	 * @param matricula
+	 *            A String a ser verificada.
+	 */
 	public static void matriculaInvalida(String matricula) {
 		if (matricula == null) {
 			throw new NullPointerException("Matrícula Nula");
@@ -12,6 +27,12 @@ public class Validacao {
 		}
 	}
 
+	/**
+	 * Verifica se o nome do Grupo é nulo ou vazio.
+	 * 
+	 * @param nomeDoGrupo
+	 *            A String a ser verificada.
+	 */
 	public static void nomeDoGrupoInvalido(String nomeDoGrupo) {
 		if (nomeDoGrupo == null) {
 			throw new NullPointerException("Nome Nulo");
@@ -22,6 +43,16 @@ public class Validacao {
 		}
 	}
 
+	/**
+	 * Verifica se os parâmetros de cadastro de um Aluno são inválidos.
+	 * 
+	 * @param matricula
+	 *            A matrícula do aluno.
+	 * @param nome
+	 *            O nome do aluno.
+	 * @param curso
+	 *            O curso do aluno.
+	 */
 	public static void cadastraAlunoInvalido(String matricula, String nome, String curso) {
 		if (matricula == null) {
 			throw new NullPointerException("Matrícula Nula");
