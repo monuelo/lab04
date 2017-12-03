@@ -1,7 +1,7 @@
-# Laboratório 4 - Programação II - UFCG
+# <a name="Top"></a>Laboratório 4 - Programação II - UFCG
 *Turma 02 - Matheus Gaudêncio*
 
-<a name="Top"></a>Sections
+Sections
 -----------------------------------
 - [Descrição](#Descricao)  
 - [Diagrama de Classes](#Diagrama)
@@ -18,7 +18,7 @@ Controle de Alunos
 
 ## <a name="Diagrama"></a>Diagrama de Classes
 
-![Diagrama](https://i.imgur.com/Lc0DDTb.png)
+<img src="https://i.imgur.com/no73rAz.png" width="860">
 
 ### <a name="Links"><a/>Links
   ----------------------------------------------------------------------------------------------------------
