@@ -1,6 +1,7 @@
 # Laboratório 4 - Programação II - UFCG
 *Turma 02 - Matheus Gaudêncio*
 
+![logo](http://www.dsc.ufcg.edu.br/~sacc/img/logo-topo2.png)
 ### Descrição
 Controle de Alunos
 *Neste laboratório, construiremos um sistema que será a base do controle de alunos de Programação II. Como sistema, deve ser possível primeiramente cadastrar e consultar alunos. Cada aluno tem uma matrícula, nome e curso (todos strings). Cada consulta deve procurar o aluno a partir de sua matrícula. O aluno é identificado unicamente pela matrícula e não deve ser possível alterar os dados dos alunos uma vez cadastrado.*
